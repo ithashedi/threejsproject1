@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Simple 3D cube</title>
+		<style>
+            
+			body { margin: 0; }
+            /* we add this to make the web page responsive */
+            canvas {width: 100%; height: 100%;}
+		</style>
+	</head>
+	<body>
+        <!-- here we are importing the three js use cdn -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r126/three.min.js" integrity="sha512-n8IpKWzDnBOcBhRlHirMZOUvEq2bLRMuJGjuVqbzUJwtTsgwOgK5aS0c1JA647XWYfqvXve8k3PtZdzpipFjgg==" crossorigin="anonymous"></script>
+		<script>
+            // here we are creating the scene
+			const scene = new THREE.Scene();
+            // here we are adding the camera
+			const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+			const renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+
+			const geometry = new THREE.BoxGeometry();
+            // here is adding the meterail of the shape
+			const material = new THREE.MeshBasicMaterial( { color: 0x564d } );
+			const cube = new THREE.Mesh( geometry, material );
+			scene.add( cube );
+
+			camera.position.z = 5;
+
+			const animate = function () {
+				requestAnimationFrame( animate );
+                // here we control the speed of the rotationg
+				cube.rotation.x += 0.01;
+				cube.rotation.y += 0.01;
+
+				renderer.render( scene, camera );
+			};
+            // this is the command the animate the shape which get the 3d working for us
+			animate();
+		</script>
+	</body>
+</html>
